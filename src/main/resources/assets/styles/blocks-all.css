@@ -1,1 +1,13 @@
-@import url("blocks");
+/*
+ * The styles of all the blocks, bundled by PostCSS into assets/styles/blocks-all.min.css. Each block's styles live next
+ * to its form fragment (cms/form-fragments/<name>/<name>.css); html-area.css is shared by the blocks with rich text.
+ */
+@import url("html-area.css");
+@import url("content-grid.css");
+@import url("../../cms/form-fragments/blocks-accordion/blocks-accordion.css");
+@import url("../../cms/form-fragments/_blocks-card/_blocks-card.css");
+@import url("../../cms/form-fragments/blocks-cards/blocks-cards.css");
+@import url("../../cms/form-fragments/blocks-text-highlighted/blocks-text-highlighted.css");
+@import url("../../cms/form-fragments/blocks-images/blocks-images.css");
+@import url("../../cms/form-fragments/blocks-map/blocks-map.css");
+@import url("../../cms/form-fragments/blocks-quote/blocks-quote.css");

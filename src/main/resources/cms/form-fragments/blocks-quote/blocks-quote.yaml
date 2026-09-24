@@ -1,0 +1,40 @@
+kind: "FormFragment"
+title:
+  text: "Quote"
+  i18n: "form-fragments.blocks-quote.displayName"
+description:
+  text: "A stylized quote with an image of the person quoted"
+  i18n: "form-fragments.blocks-quote.description"
+form:
+  - type: "HtmlArea"
+    name: "quote"
+    label:
+      text: "Quote"
+      i18n: "form-fragments.blocks-quote.quote"
+    occurrences:
+      min: 1
+      max: 1
+    exclude: "*"
+    include: "Format Bold RemoveFormat | BulletedList NumberedList | Link Unlink | SpecialChar Macro"
+    allowHeadings: "h3"
+
+  - type: "TextLine"
+    name: "attribution"
+    label:
+      text: "Quoted by"
+      i18n: "form-fragments.blocks-quote.attribution"
+    helpText:
+      text: "The name, and optionally the role, of the person quoted"
+      i18n: "form-fragments.blocks-quote.attribution.helpText"
+    occurrences:
+      min: 0
+      max: 1
+
+  - type: "ImageSelector"
+    name: "imageId"
+    label:
+      text: "Image of the person quoted"
+      i18n: "form-fragments.blocks-quote.imageId"
+    occurrences:
+      min: 0
+      max: 1

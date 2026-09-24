@@ -1,0 +1,9 @@
+# Libraries from the Enonic Market ( https://market.enonic.com/libraries ) and other Maven repos.
+# Enonic XP's own libraries are provided by the `xplibs` catalog (com.enonic.xp.settings plugin).
+[versions]
+asset = "2.0.1"
+freemarker = "4.0.0"
+
+[libraries]
+asset = { module = "com.enonic.lib:lib-asset", version.ref = "asset" }
+freemarker = { module = "no.item:lib-xp-freemarker", version.ref = "freemarker" }

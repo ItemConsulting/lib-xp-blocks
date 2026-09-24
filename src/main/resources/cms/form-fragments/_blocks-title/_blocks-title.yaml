@@ -1,0 +1,16 @@
+kind: "FormFragment"
+title:
+  text: "Title"
+  i18n: "form-fragments._blocks-title.displayName"
+description:
+  text: "A reusable title section that can be included before the main block content"
+  i18n: "form-fragments._blocks-title.description"
+form:
+  - type: "TextLine"
+    name: "title"
+    label:
+      text: "Title"
+      i18n: "form-fragments._blocks-title.title"
+    occurrences:
+      min: 0
+      max: 1

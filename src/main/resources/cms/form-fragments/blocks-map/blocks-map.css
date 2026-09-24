@@ -1,0 +1,9 @@
+.blocks-map {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-size-5);
+}
+
+.blocks-map .maplibregl-popup-content {
+  color: black; /* The marker popover has a hard-coded white background */
+}

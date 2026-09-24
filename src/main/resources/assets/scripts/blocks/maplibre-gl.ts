@@ -1,4 +1,4 @@
-import { Map as MapLibreMap, Marker, Popup, setWorkerUrl } from "maplibre-gl";
+import { Map as MapLibreMap, Marker, Popup } from "maplibre-gl";
 
 export default class MapLibreGl extends HTMLElement {
   connectedCallback() {
@@ -9,12 +9,7 @@ export default class MapLibreGl extends HTMLElement {
     const lng = parseFloat(this.getAttribute("lng") ?? "0");
     const lat = parseFloat(this.getAttribute("lat") ?? "0");
     const zoom = parseFloat(this.getAttribute("zoom") ?? "1");
-    const workerSrc = this.getAttribute("workerSrc");
     const styleSrc = this.getAttribute("styleSrc");
-
-    if (workerSrc) {
-      setWorkerUrl(workerSrc);
-    }
 
     const text = document.createElement("div");
     text.setAttribute("style", "width: 400px; height: 400px;");

@@ -1,0 +1,14 @@
+pluginManagement {
+  repositories {
+    // no.item.xp.codegen 3.0.0 (the first release that reads XP 8 YAML descriptors) is not on the
+    // Gradle Plugin Portal yet, so the SNAPSHOT is resolved from ~/.m2 (publishToMavenLocal).
+    mavenLocal()
+    gradlePluginPortal()
+  }
+}
+
+plugins {
+  id 'com.enonic.xp.settings' version '4.2.0'
+}
+
+rootProject.name = projectName

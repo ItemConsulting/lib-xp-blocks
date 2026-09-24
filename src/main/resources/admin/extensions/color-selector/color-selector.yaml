@@ -1,0 +1,7 @@
+kind: "AdminExtension"
+title:
+  text: "Color selector"
+description:
+  text: "Lists the colors configured for the application (the `colors` app config), for the color picker in _blocks-color"
+interfaces:
+  - "contentstudio.customselector"

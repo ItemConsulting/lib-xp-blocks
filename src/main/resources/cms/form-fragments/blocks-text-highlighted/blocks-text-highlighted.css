@@ -1,0 +1,20 @@
+.blocks-text-highlighted {
+  padding: var(--ds-size-15) 0;
+  color: var(--ds-color-neutral-text-default);
+  background-color: var(--ds-color-background-tinted);
+
+  &.content-grid__breakout {
+    display: grid;
+    grid-template-columns: subgrid;
+
+    > * {
+      grid-column: content;
+    }
+  }
+}
+
+@media only screen and (width < 840px) {
+  .blocks-text-highlighted.content-grid__breakout {
+    grid-column: full;
+  }
+}

@@ -1,47 +1,90 @@
 plugins {
-  id "java"
+  id "java-library"
   id "maven-publish"
-  id "com.enonic.xp.base" version "3.6.2"
-  id "no.item.xp.codegen" version "2.7.0"
+  id "com.enonic.xp.base"
+  id "no.item.xp.codegen" version "3.0.0-SNAPSHOT"
   id "com.github.node-gradle.node" version "7.1.0"
 }
 
-sourceCompatibility = JavaVersion.VERSION_11
-targetCompatibility = JavaVersion.VERSION_11
-
 dependencies {
-  implementation "com.enonic.lib:lib-asset:1.0.3"
-  implementation "no.item:lib-xp-freemarker:3.0.0"
-  implementation "org.webjars.npm:maplibre-gl:5.6.1"
+  // ─────────────────────────────────────────────────────────────────────────
+  // Libraries the blocks call at runtime (versions in gradle/libs.versions.toml). They are published as runtime
+  // dependencies of the jar, and a consumer's `include` is transitive, so consuming apps get them without listing them.
+  // ─────────────────────────────────────────────────────────────────────────
+  implementation libs.asset
+  implementation libs.freemarker
+  implementation xplibs.content
+  implementation xplibs.i18n
+  implementation xplibs.portal
 }
 
 repositories {
+  mavenLocal()
   mavenCentral()
   xp.enonicRepo()
-  maven { url "https://repo.itemtest.no/releases" }
-  maven { url "https://repo.itemtest.no/snapshots" }
+  maven { url = "https://repo.itemtest.no/releases" }
 }
 
 node {
-  // Whether to download and install a specific Node.js version or not
-  // If false, it will use the globally installed Node.js
-  // If true, it will download node using above parameters
-  // Note that npm is bundled with Node.js
   download = true
-
-  // Version of node to download and install (only used if download is true)
-  // It will be unpacked in the workDir
-  version = "24.3.0"
+  // Single source of truth for the Node version, shared with .github/workflows and nvm
+  version = file(".nvmrc").text.trim()
 }
 
+// npmBuild writes the compiled scripts and styles here, and processResources copies them into the jar's resources
+def npmOutputDir = layout.buildDirectory.dir("npm")
 
 processResources {
+  from(npmOutputDir)
+  dependsOn "npmBuild"
+
+  // Copy doesn't remove files that are no longer produced (e.g. a deleted or renamed source file), so start from an
+  // empty directory; everything in it comes from this task
+  doFirst {
+    delete destinationDir
+  }
+
   exclude "**/.gitkeep"
   exclude "**/*.json"
   exclude "**/*.ts"
   exclude "**/*.tsx"
+
+  // The block styles are shipped bundled as assets/styles/blocks-all.min.css by npmBuild (PostCSS), so their sources are
+  // left out: the stylesheets in assets/styles/ and the ones next to the form fragments (cms/form-fragments/<name>/).
+  // The excludes also apply to npmBuild's output, so the bundle (*.min.css) is kept.
+  exclude { FileTreeElement file ->
+    file.path.startsWith("assets/styles/") && file.name.endsWith(".css") && !file.name.endsWith(".min.css")
+  }
+  exclude "cms/**/*.css"
 }
 
+tasks.register("npmBuild", NpmTask) {
+  args = [
+    "run",
+    "--silent",
+    "build"
+  ]
+  dependsOn npmInstall, generateTypeScript
+  environment = [
+    "FORCE_COLOR": "true",
+    "LOG_LEVEL_FROM_GRADLE": gradle.startParameter.logLevel.toString(),
+    "NODE_ENV": isDevBuild() ? "development" : "production"
+  ]
+  inputs.dir "src/main/resources"
+  outputs.dir npmOutputDir
+  outputs.upToDateWhen { false }
+}
+
+// Accepts -Penv=dev as well as the older -Pdev / -Pdevelopment spellings.
+// The legacy flags have to be read straight off the command line: Gradle exposes tasks as project properties, so
+// project.hasProperty("dev") is always true once the "dev" task below exists, which made every build a dev build.
+boolean isDevBuild() {
+  Map<String, String> cliProperties = gradle.startParameter.projectProperties
+
+  return project.findProperty("env") == "dev" ||
+    cliProperties.containsKey("dev") ||
+    cliProperties.containsKey("development")
+}
 
 tasks.register("dev", Exec) {
   if (org.gradle.internal.os.OperatingSystem.current().isWindows()) {
@@ -51,27 +94,8 @@ tasks.register("dev", Exec) {
   }
 }
 
-tasks.register("npmBuild", NpmTask) {
-  args = [
-    "run",
-    "--silent",
-    "build"
-  ]
-  dependsOn npmInstall
-  environment = [
-    "FORCE_COLOR"          : "true",
-    "LOG_LEVEL_FROM_GRADLE": gradle.startParameter.logLevel.toString(),
-    "NODE_ENV"             : project.hasProperty("dev") || project.hasProperty("development") ? "development" : "production"
-  ]
-  inputs.dir "src/main/resources"
-  outputs.dir "build/resources/main"
-  outputs.upToDateWhen { false }
-}
-
-jar.dependsOn npmBuild
-
 tasks.register("npmCheck", NpmTask) {
-  dependsOn npmInstall
+  dependsOn npmInstall, generateTypeScript
   args = [
     "run",
     "check"
@@ -83,18 +107,27 @@ tasks.register("npmCheck", NpmTask) {
 
 check.dependsOn npmCheck
 
-jar {
-  exclude "**/*.freemarker.js"
-  exclude "**/*.stories.css"
-  exclude "assets/styles/blocks"
-  exclude "site/storybook-utils.js"
+tasks.withType(Copy).configureEach {
+  includeEmptyDirs = false
+}
+
+// A changesets prerelease (`npx changeset pre enter beta`) is recorded in .changeset/pre.json as `"mode": "pre"`, and
+// its versions (1.0.0-beta.0) do not end in -SNAPSHOT. They still belong in the snapshots repository, so the releases
+// repository only ever holds stable versions. `npx changeset pre exit` flips the mode to "exit", and the
+// `changeset version` that follows bumps to the stable version and deletes the file.
+boolean isChangesetPrerelease() {
+  File preState = file(".changeset/pre.json")
+
+  return preState.exists() && new groovy.json.JsonSlurper().parse(preState).mode == "pre"
 }
 
 publishing {
   repositories {
     maven {
       name = "itemtestRepository"
-      url = "https://repo.itemtest.no/releases"
+      url = version.endsWith("SNAPSHOT") || isChangesetPrerelease()
+        ? "https://repo.itemtest.no/snapshots"
+        : "https://repo.itemtest.no/releases"
       credentials(PasswordCredentials)
       authentication {
         basic(BasicAuthentication)
@@ -104,9 +137,11 @@ publishing {
   publications {
     maven(MavenPublication) {
       from components.java
-      groupId group
-      artifactId projectName
-      version version
+      // project.* qualified: inside a MavenPublication closure a bare "version" would
+      // resolve to the publication's own property, not the project's.
+      groupId = project.group
+      artifactId = projectName
+      version = project.version
     }
   }
 }

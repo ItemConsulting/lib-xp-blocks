@@ -1,0 +1,22 @@
+@property --flow-space {
+  syntax: "<length-percentage>";
+  inherits: false;
+  initial-value: 0;
+}
+
+.html-area {
+  font-size: var(--ds-body-md-font-size);
+  font-weight: var(--ds-body-md-font-weight);
+  line-height: var(--ds-body-md-line-height);
+  letter-spacing: var(--ds-body-md-letter-spacing);
+
+  & > * + * {
+    margin-block-start: var(--flow-space);
+  }
+}
+
+/* The default flow space. :where() keeps its specificity at 0, so a rule for an element (e.g. `h2`) overrides it */
+
+:where(.html-area > *) {
+  --flow-space: 1lh;
+}
