@@ -87,7 +87,9 @@ GitHub Actions (`.github/workflows/`):
 - **`main.yml` (CI)** — on `main` and pull requests: `npm ci`, then `./gradlew build` on Java 25.
 - **`publish.yml` (Publish)** — after a successful CI run on `main`: uses `changesets/action` to either open a
   "Version Packages" PR or, once merged, publish the npm package and the jar and create a GitHub release. The
-  `versioning` script keeps `package.json` and `gradle.properties` versions in sync.
+  `versioning` script keeps `package.json` and `gradle.properties` versions in sync through
+  `.changeset/gradle-version.mjs`, which turns a prerelease (`1.0.0-beta.0`) into the jar snapshot `1.0.0-SNAPSHOT`,
+  so `build.gradle` publishes it to the snapshots repository.
 
 ## Architecture
 

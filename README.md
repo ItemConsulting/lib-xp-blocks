@@ -162,8 +162,8 @@ Releases are driven by [Changesets](https://github.com/changesets/changesets) an
    ```
 
 2. When that lands on `main`, the *Publish* workflow opens (or updates) a **Version Packages** pull
-   request. It bumps the version in *package.json*, *package-lock.json* and *gradle.properties*, and
-   folds the changesets into *CHANGELOG.md*.
+   request. It bumps the version in *package.json*, *package-lock.json* and *gradle.properties* (through
+   *.changeset/gradle-version.mjs*), and folds the changesets into *CHANGELOG.md*.
 
 3. Merging that pull request makes the same workflow do the release:
 
@@ -182,13 +182,19 @@ A beta is a Changesets [prerelease](https://github.com/changesets/changesets/blo
 npx changeset pre enter beta
 ```
 
-Commit the *.changeset/pre.json* this creates. While it says `"mode": "pre"`, the **Version Packages** pull request produces
-versions like `1.0.0-beta.0`, npm publishes them under the `beta` dist-tag, and the jar goes to the *snapshots*
-repository instead of *releases*. Consumers of a beta therefore add that repository:
+Commit the *.changeset/pre.json* this creates. While it says `"mode": "pre"`, the **Version Packages** pull request
+produces versions like `1.0.0-beta.0`, and npm publishes them under the `beta` dist-tag. Maven repositories only treat
+the `-SNAPSHOT` suffix as a snapshot, so the jar is instead versioned as a snapshot of the release the beta leads up to,
+`1.0.0-SNAPSHOT`, and every beta replaces the previous one in the *snapshots* repository. Consumers of a beta therefore
+add that repository and include the snapshot:
 
 ```groovy
 repositories {
   maven { url = "https://repo.itemtest.no/snapshots" }
+}
+
+dependencies {
+  include "no.item:lib-xp-blocks:1.0.0-SNAPSHOT"
 }
 ```
 

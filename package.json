@@ -65,7 +65,7 @@
     "lint": "biome ci",
     "lint:fix": "biome check --write",
     "release": "changeset publish",
-    "versioning": "changeset version && npm i --package-lock-only && NEW_VERSION=$(node -p \"require('./package.json').version\") && sed -i -E \"s/^version *=.*/version = ${NEW_VERSION}/\" gradle.properties",
+    "versioning": "changeset version && npm i --package-lock-only && node .changeset/gradle-version.mjs",
     "prepublishOnly": "npm run prepublish:types && npm run prepublish:generated && npm run prepublish:styles",
     "prepublish:types": "tsc -p src/main/resources/tsconfig.json --declaration --emitDeclarationOnly --declarationDir dist",
     "prepublish:generated": "cp -r .xp-codegen/. dist",

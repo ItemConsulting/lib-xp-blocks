@@ -111,21 +111,11 @@ tasks.withType(Copy).configureEach {
   includeEmptyDirs = false
 }
 
-// A changesets prerelease (`npx changeset pre enter beta`) is recorded in .changeset/pre.json as `"mode": "pre"`, and
-// its versions (1.0.0-beta.0) do not end in -SNAPSHOT. They still belong in the snapshots repository, so the releases
-// repository only ever holds stable versions. `npx changeset pre exit` flips the mode to "exit", and the
-// `changeset version` that follows bumps to the stable version and deletes the file.
-boolean isChangesetPrerelease() {
-  File preState = file(".changeset/pre.json")
-
-  return preState.exists() && new groovy.json.JsonSlurper().parse(preState).mode == "pre"
-}
-
 publishing {
   repositories {
     maven {
       name = "itemtestRepository"
-      url = version.endsWith("SNAPSHOT") || isChangesetPrerelease()
+      url = version.endsWith("SNAPSHOT")
         ? "https://repo.itemtest.no/snapshots"
         : "https://repo.itemtest.no/releases"
       credentials(PasswordCredentials)
