@@ -55,4 +55,3 @@
     [/#list]
   </popover-gallery>
 </div>
-

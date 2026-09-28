@@ -6,13 +6,9 @@ import { getImageParams, type ImageParams } from "../../../lib/item/blocks/image
 import { processLink } from "../../../lib/item/blocks/links";
 import type { ContentImage, ContentVector } from "../../../lib/item/blocks/types";
 import { isEmptyOrUndefined, partPathToId } from "../../../lib/item/blocks/utils";
+import type { _BlocksColor, _BlocksCard as BlocksCardRaw } from "..";
 import type { BlockProcessorParams } from "../blocks/blocks";
-import type { _BlocksCard as BlocksCardRaw } from ".";
 import type { BlocksCard } from "./_blocks-card.freemarker";
-
-type BlocksCardRawWithOptionalFields = BlocksCardRaw & {
-  color?: string;
-};
 
 const WIDTH_CONTAINER = 676; // At 620 multi column layouts will become single column
 const WIDTH_LARGEST_IN_CARD = 431; // Largest common width in multi column layouts
@@ -21,7 +17,7 @@ const IMAGE_PROPORTION_16_9 = 9 / 16;
 const view = resolve("_blocks-card.ftlh");
 
 export function process(
-  block: BlocksCardRawWithOptionalFields,
+  block: BlocksCardRaw & _BlocksColor,
   { locale, component, blockIndex }: BlockProcessorParams,
   cardIndex?: number,
 ): Response {
