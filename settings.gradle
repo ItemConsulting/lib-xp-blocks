@@ -1,9 +1,16 @@
 pluginManagement {
   repositories {
-    // no.item.xp.codegen 3.0.0 (the first release that reads XP 8 YAML descriptors) is not on the
-    // Gradle Plugin Portal yet, so the SNAPSHOT is resolved from ~/.m2 (publishToMavenLocal).
-    mavenLocal()
     gradlePluginPortal()
+    // Snapshots of Item's own plugins, such as no.item.xp.codegen
+    maven {
+      url = "https://repo.itemtest.no/snapshots"
+      mavenContent {
+        snapshotsOnly()
+      }
+      content {
+        includeGroupByRegex "no\\.item(\\..*)?"
+      }
+    }
   }
 }
 
