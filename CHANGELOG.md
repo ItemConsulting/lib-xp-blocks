@@ -1,5 +1,20 @@
 # @item-enonic-types/lib-blocks
 
+## 1.0.0-beta.0
+
+### Major Changes
+
+- a568c48: - Support XP8. Remove support for XP7.
+
+### Minor Changes
+
+- 96803ec: Remove publication from block-quote (it is not much used, and doesn't need to be included by default)
+- a2352b6: Add map block
+
+### Patch Changes
+
+- 96803ec: Fix nested content grids
+
 ## 0.5.0
 
 ### Minor Changes
