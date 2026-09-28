@@ -1,0 +1,28 @@
+kind: "FormFragment"
+title:
+  text: "Link to more"
+  i18n: "form-fragments._blocks-link-to-more.displayName"
+description:
+  text: "A reference to content where the user can read more about the subject"
+  i18n: "form-fragments._blocks-link-to-more.description"
+form:
+  - type: "ContentSelector"
+    name: "linkToMoreContentId"
+    label:
+      text: "Link to content"
+      i18n: "form-fragments._blocks-link-to-more.linkToMoreContentId"
+    helpText:
+      text: "Show the user a link to a page where they can see a more complete list or read more about a topic."
+      i18n: "form-fragments._blocks-link-to-more.linkToMoreContentId.helpText"
+    occurrences:
+      min: 0
+      max: 1
+
+  - type: "TextLine"
+    name: "linkToMoreText"
+    label:
+      text: "Link text"
+      i18n: "form-fragments._blocks-link-to-more.linkToMoreText"
+    occurrences:
+      min: 0
+      max: 1

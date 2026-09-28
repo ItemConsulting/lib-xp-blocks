@@ -1,0 +1,101 @@
+kind: "FormFragment"
+title:
+  text: "Blocks"
+  i18n: "form-fragments.blocks.displayName"
+form:
+  - type: "OptionSet"
+    name: "blocks"
+    label:
+      text: "Content blocks"
+      i18n: "form-fragments.blocks.blocks"
+    helpText:
+      text: "Your page content is build by a sequence of blocks."
+      i18n: "form-fragments.blocks.blocks.helpText"
+    occurrences:
+      min: 0
+      max: 0
+    selection:
+      min: 1
+      max: 1
+    options:
+      - name: "blocks-text"
+        label:
+          text: "Text"
+          i18n: "form-fragments.blocks-text.displayName"
+        helpText:
+          text: "Rich text field that can contain lists and tables"
+          i18n: "form-fragments.blocks-text.description"
+        items:
+          - include: "blocks-text"
+
+      - name: "blocks-images"
+        label:
+          text: "Images"
+          i18n: "form-fragments.blocks-images.displayName"
+        helpText:
+          text: "An image gallery or an image that can be expanded"
+          i18n: "form-fragments.blocks-images.description"
+        items:
+          - include: "blocks-images"
+
+      - name: "blocks-text-highlighted"
+        label:
+          text: "Highlighted text"
+          i18n: "form-fragments.blocks-text-highlighted.displayName"
+        helpText:
+          text: "A box containing text that can have different background colors"
+          i18n: "form-fragments.blocks-text-highlighted.description"
+        items:
+          - include: "blocks-text-highlighted"
+
+      - name: "blocks-accordion"
+        label:
+          text: "Accordion"
+          i18n: "form-fragments.blocks-accordion.displayName"
+        helpText:
+          text: "A list of expandable sections"
+          i18n: "form-fragments.blocks-accordion.description"
+        items:
+          - include: "blocks-accordion"
+
+      - name: "blocks-cards"
+        label:
+          text: "Cards"
+          i18n: "form-fragments.blocks-cards.displayName"
+        helpText:
+          text: "Cards can have a title, text, image and can link to content"
+          i18n: "form-fragments.blocks-cards.description"
+        items:
+          - include: "_blocks-color"
+          - include: "blocks-cards"
+          - include: "_blocks-link-to-more"
+
+      - name: "blocks-quote"
+        label:
+          text: "Quote"
+          i18n: "form-fragments.blocks-quote.displayName"
+        helpText:
+          text: "A stylized quote with an image of the person quoted"
+          i18n: "form-fragments.blocks-quote.description"
+        items:
+          - include: "blocks-quote"
+
+      - name: "blocks-map"
+        label:
+          text: "Map"
+          i18n: "form-fragments.blocks-map.displayName"
+        helpText:
+          text: "An interactive map that can contain markers"
+          i18n: "form-fragments.blocks-map.description"
+        items:
+          - include: "blocks-map"
+
+      - name: "blocks-reuse"
+        label:
+          text: "Reuse"
+          i18n: "form-fragments.blocks-reuse.displayName"
+        helpText:
+          text: "Reuse all blocks inside another content"
+          i18n: "form-fragments.blocks-reuse.description"
+        items:
+          - include: "blocks-reuse"

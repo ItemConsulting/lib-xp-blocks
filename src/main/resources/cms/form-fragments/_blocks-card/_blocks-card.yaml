@@ -1,0 +1,84 @@
+kind: "FormFragment"
+title:
+  text: "Card"
+  i18n: "form-fragments._blocks-card.displayName"
+form:
+  - type: "TextLine"
+    name: "title"
+    label:
+      text: "Title"
+      i18n: "form-fragments._blocks-card.title"
+    occurrences:
+      min: 0
+      max: 1
+
+  - type: "TextLine"
+    name: "kicker"
+    label:
+      text: "Kicker"
+      i18n: "form-fragments._blocks-card.kicker"
+    occurrences:
+      min: 0
+      max: 1
+
+  - type: "TextArea"
+    name: "text"
+    label:
+      text: "Text"
+      i18n: "form-fragments._blocks-card.text"
+    occurrences:
+      min: 0
+      max: 1
+
+  - type: "OptionSet"
+    name: "link"
+    label:
+      text: "Link"
+      i18n: "form-fragments._blocks-card.link"
+    occurrences:
+      min: 1
+      max: 1
+    selection:
+      min: 1
+      max: 1
+    options:
+      - name: "internal"
+        label:
+          text: "Internal"
+          i18n: "form-fragments._blocks-card.link.internal"
+        items:
+          - type: "ContentSelector"
+            name: "contentId"
+            label:
+              text: "Internal link"
+              i18n: "form-fragments._blocks-card.link.internal.contentId"
+            occurrences:
+              min: 1
+              max: 1
+        selected: true
+      - name: "external"
+        label:
+          text: "External"
+          i18n: "form-fragments._blocks-card.link.external"
+        items:
+          - type: "TextLine"
+            name: "url"
+            label:
+              text: "External link"
+              i18n: "form-fragments._blocks-card.link.external.url"
+            helpText:
+              text: "A web address that starts with https://, e.g. https://www.example.com"
+              i18n: "form-fragments._blocks-card.link.external.url.helpText"
+            regexp: '^https?://\S+\.\S+$'
+            occurrences:
+              min: 1
+              max: 1
+
+  - type: "ImageSelector"
+    name: "imageId"
+    label:
+      text: "Image"
+      i18n: "form-fragments._blocks-card.imageId"
+    occurrences:
+      min: 0
+      max: 1

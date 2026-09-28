@@ -1,0 +1,18 @@
+kind: "FormFragment"
+title:
+  text: "Cards"
+  i18n: "form-fragments.blocks-cards.displayName"
+description:
+  text: "Cards can have a title, text, image and can link to content"
+  i18n: "form-fragments.blocks-cards.description"
+form:
+  - type: "ItemSet"
+    name: "items"
+    label:
+      text: "Cards"
+      i18n: "form-fragments.blocks-cards.items"
+    occurrences:
+      min: 1
+      max: 0
+    items:
+      - include: "_blocks-card"

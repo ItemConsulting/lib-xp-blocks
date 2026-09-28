@@ -1,0 +1,26 @@
+.blocks-quote {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-size-5);
+
+  .blocks-quote__body {
+    display: flex;
+    gap: var(--ds-size-5);
+    align-items: center;
+  }
+
+  .blocks-quote__image {
+    height: 100%;
+  }
+}
+
+/* The quote text and its attribution are aligned, so neither keeps the browser's default indent */
+
+.blocks-quote__quote,
+.blocks-quote__text {
+  margin: 0;
+}
+
+.blocks-quote__attribution::before {
+  content: "\2014";
+}

@@ -1,0 +1,67 @@
+kind: "FormFragment"
+title:
+  text: "Map"
+  i18n: "form-fragments.blocks-map.displayName"
+description:
+  text: "An interactive map that can contain markers"
+  i18n: "form-fragments.blocks-map.description"
+form:
+  - type: "GeoPoint"
+    name: "center"
+    label:
+      text: "Center"
+      i18n: "form-fragments.blocks-map.center"
+    occurrences:
+      min: 1
+      max: 1
+    default: "59.912087,10.736717"
+
+  - type: "Long"
+    name: "zoom"
+    label:
+      text: "Zoom"
+      i18n: "form-fragments.blocks-map.zoom"
+    occurrences:
+      min: 1
+      max: 1
+    default: 10
+
+  - type: "OptionSet"
+    name: "markers"
+    label:
+      text: "Markers"
+      i18n: "form-fragments.blocks-map.markers"
+    helpText:
+      text: "Add helpful markers to the page"
+      i18n: "form-fragments.blocks-map.markers.helpText"
+    occurrences:
+      min: 0
+      max: 0
+    selection:
+      min: 1
+      max: 1
+    options:
+      - name: "popup"
+        label:
+          text: "Popup"
+          i18n: "form-fragments.blocks-map.markers.popup"
+        items:
+          - type: "GeoPoint"
+            name: "lngLat"
+            label:
+              text: "Position"
+              i18n: "form-fragments.blocks-map.markers.popup.lngLat"
+            occurrences:
+              min: 1
+              max: 1
+          - type: "HtmlArea"
+            name: "text"
+            label:
+              text: "Text"
+              i18n: "form-fragments.blocks-map.markers.popup.text"
+            occurrences:
+              min: 0
+              max: 1
+            exclude: "*"
+            include: "Format Bold RemoveFormat | BulletedList NumberedList | Link Unlink | SpecialChar Macro"
+            allowHeadings: "h3"

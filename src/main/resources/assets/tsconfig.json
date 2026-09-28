@@ -20,10 +20,19 @@
   "exclude": ["./**/*.d.ts"],
 
   "compilerOptions": {
-    "skipLibCheck": true,
+    "target": "ES2023",
     "lib": [
-      "DOM", // console, document, window, etc...
-      "ES2020"
-    ]
+      "ES2023",
+      "DOM" // console, document, window, etc...
+    ],
+
+    // Enable all strict type-checking options.
+    "strict": true,
+
+    // The scripts are bundled by tsdown, so resolve imports the way a bundler does.
+    "module": "preserve",
+    "moduleResolution": "bundler",
+
+    "skipLibCheck": true
   }
 }

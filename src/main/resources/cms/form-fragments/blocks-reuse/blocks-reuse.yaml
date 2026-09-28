@@ -1,0 +1,16 @@
+kind: "FormFragment"
+title:
+  text: "Reuse"
+  i18n: "form-fragments.blocks-reuse.displayName"
+description:
+  text: "Reuse all blocks inside another content"
+  i18n: "form-fragments.blocks-reuse.description"
+form:
+  - type: "ContentSelector"
+    name: "contentId"
+    label:
+      text: "Include blocks from this content"
+      i18n: "form-fragments.blocks-reuse.contentId"
+    occurrences:
+      min: 1
+      max: 1

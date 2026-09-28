@@ -1,0 +1,14 @@
+kind: "FormFragment"
+title:
+  text: "Color"
+  i18n: "form-fragments._blocks-color.displayName"
+form:
+  - type: "CustomSelector"
+    name: "color"
+    label:
+      text: "Color"
+      i18n: "form-fragments._blocks-color.color"
+    occurrences:
+      min: 0
+      max: 1
+    extension: "color-selector"

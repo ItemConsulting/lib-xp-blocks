@@ -1,18 +1,20 @@
 {
-  "$schema": "https://biomejs.dev/schemas/2.5.2/schema.json",
+  "$schema": "https://biomejs.dev/schemas/2.5.14/schema.json",
   "vcs": {
     "enabled": true,
     "clientKind": "git",
     "useIgnoreFile": true
   },
   "files": {
-    "includes": ["**", "!**/.xp-codegen", "!**/build", "!**/dist", "!**/.storybook/public", "!**/*.css", "!**/*.svg"]
+    "includes": ["**", "!**/.xp-codegen", "!**/build", "!**/dist", "!**/*.svg"]
   },
   "formatter": {
     "enabled": true,
     "indentStyle": "space",
     "indentWidth": 2,
-    "lineWidth": 120
+    "lineEnding": "lf",
+    "lineWidth": 120,
+    "useEditorconfig": true
   },
   "javascript": {
     "formatter": {
@@ -27,5 +29,12 @@
   },
   "linter": {
     "enabled": true
+  },
+  "assist": {
+    "actions": {
+      "source": {
+        "useSortedProperties": "on"
+      }
+    }
   }
 }
