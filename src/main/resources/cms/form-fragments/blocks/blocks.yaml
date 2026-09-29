@@ -9,7 +9,7 @@ form:
       text: "Content blocks"
       i18n: "form-fragments.blocks.blocks"
     helpText:
-      text: "Your page content is build by a sequence of blocks."
+      text: "Your page content is built from a sequence of blocks."
       i18n: "form-fragments.blocks.blocks.helpText"
     occurrences:
       min: 0
@@ -43,7 +43,7 @@ form:
           text: "Highlighted text"
           i18n: "form-fragments.blocks-text-highlighted.displayName"
         helpText:
-          text: "A box containing text that can have different background colors"
+          text: "A box containing text that can have different background colours"
           i18n: "form-fragments.blocks-text-highlighted.description"
         items:
           - include: "blocks-text-highlighted"
@@ -75,7 +75,7 @@ form:
           text: "Quote"
           i18n: "form-fragments.blocks-quote.displayName"
         helpText:
-          text: "A stylized quote with an image of the person quoted"
+          text: "A stylised quote with an image of the person quoted"
           i18n: "form-fragments.blocks-quote.description"
         items:
           - include: "blocks-quote"

@@ -3,7 +3,7 @@ title:
   text: "Highlighted text"
   i18n: "form-fragments.blocks-text-highlighted.displayName"
 description:
-  text: "A box containing text that can have different background colors"
+  text: "A box containing text that can have different background colours"
   i18n: "form-fragments.blocks-text-highlighted.description"
 form:
   - type: "TextLine"
@@ -21,8 +21,8 @@ form:
       text: "Text"
       i18n: "form-fragments.blocks-text-highlighted.text"
     occurrences:
-      min: 1
+      min: 0
       max: 1
     exclude: "*"
-    include: "Format | Bold Italic RemoveFormat | BulletedList NumberedList | Subscript Superscript Blockquote | SpecialChar Link Unlink Table Image Macro"
+    include: "PasteModeSwitcher | Format Bold RemoveFormat | BulletedList NumberedList | Link Unlink | SpecialChar Macro"
     allowHeadings: "h3"

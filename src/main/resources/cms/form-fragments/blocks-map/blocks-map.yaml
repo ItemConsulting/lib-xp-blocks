@@ -9,7 +9,7 @@ form:
   - type: "GeoPoint"
     name: "center"
     label:
-      text: "Center"
+      text: "Centre"
       i18n: "form-fragments.blocks-map.center"
     occurrences:
       min: 1
@@ -63,5 +63,5 @@ form:
               min: 0
               max: 1
             exclude: "*"
-            include: "Format Bold RemoveFormat | BulletedList NumberedList | Link Unlink | SpecialChar Macro"
+            include: "PasteModeSwitcher | Format Bold RemoveFormat | BulletedList NumberedList | Link Unlink | SpecialChar Macro"
             allowHeadings: "h3"

@@ -8,5 +8,5 @@ export type BlocksTextHighlighted = {
   /**
    * Text
    */
-  text: string;
+  text?: string;
 };
