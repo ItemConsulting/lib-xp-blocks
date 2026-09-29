@@ -1,5 +1,11 @@
 # @item-enonic-types/lib-blocks
 
+## 1.0.0-beta.1
+
+### Minor Changes
+
+- 92edca5: Use UK English for phrases
+
 ## 1.0.0-beta.0
 
 ### Major Changes
