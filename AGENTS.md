@@ -116,6 +116,13 @@ appends `.helpText` to its field's key, and option-set options and selector opti
 e.g. `form-fragments._blocks-card.link.internal.contentId` and `form-fragments.blocks-map.markers.helpText`. Texts
 used only by a template have no field to follow (`blocks-images.close`).
 
+Editor-facing texts — the inline `text:` values in the YAML descriptors and the English phrases in
+`i18n/phrases.properties` — are written in British English (colour, centre, stylised), and the two must say the
+same thing. Identifiers keep their existing spelling (`color`, `center`, `color-selector`): code, generated types and
+i18n keys depend on them. The bundles use the standard names, `phrases.properties` (English, the default),
+`phrases_no.properties` (Bokmål) and `phrases_nn.properties` (Nynorsk); do not rename them to sidestep collisions with
+a consuming app's or another library's bundles, since any name is just as exposed.
+
 A template is resolved relative to the file that calls `resolve()`, which is why tsdown must emit every source file as
 its own output file.
 

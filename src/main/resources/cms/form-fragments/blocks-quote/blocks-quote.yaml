@@ -3,7 +3,7 @@ title:
   text: "Quote"
   i18n: "form-fragments.blocks-quote.displayName"
 description:
-  text: "A stylized quote with an image of the person quoted"
+  text: "A stylised quote with an image of the person quoted"
   i18n: "form-fragments.blocks-quote.description"
 form:
   - type: "HtmlArea"
