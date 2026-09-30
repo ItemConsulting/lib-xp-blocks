@@ -21,8 +21,11 @@ form:
   - type: "TextLine"
     name: "linkToMoreText"
     label:
-      text: "Link text"
+      text: "Bottom link text"
       i18n: "form-fragments._blocks-link-to-more.linkToMoreText"
+    helpText:
+      text: "The link text must, on its own and without help from the surrounding text, say where the link goes (WCAG 2.4.9). For example \"Download the annual report 2025\" or \"Read the latest news\"."
+      i18n: "form-fragments._blocks-link-to-more.linkToMoreText.helpText"
     occurrences:
       min: 0
       max: 1

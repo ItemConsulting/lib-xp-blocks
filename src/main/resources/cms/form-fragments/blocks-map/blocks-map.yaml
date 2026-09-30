@@ -32,7 +32,7 @@ form:
       text: "Markers"
       i18n: "form-fragments.blocks-map.markers"
     helpText:
-      text: "Add helpful markers to the page"
+      text: "Add helpful markers to the page."
       i18n: "form-fragments.blocks-map.markers.helpText"
     occurrences:
       min: 0

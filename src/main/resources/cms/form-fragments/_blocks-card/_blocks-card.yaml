@@ -67,7 +67,7 @@ form:
               text: "External link"
               i18n: "form-fragments._blocks-card.link.external.url"
             helpText:
-              text: "A web address that starts with https://, e.g. https://www.example.com"
+              text: "A web address that starts with https://, e.g. https://www.example.com."
               i18n: "form-fragments._blocks-card.link.external.url.helpText"
             regexp: '^https?://\S+\.\S+$'
             occurrences:

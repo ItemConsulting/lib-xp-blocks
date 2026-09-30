@@ -10,7 +10,7 @@ export type BlocksImages = {
     imageId: string;
 
     /**
-     * Description of the image for visually impaired users (alt text)
+     * Description of the image (alt text)
      */
     altText: string;
 

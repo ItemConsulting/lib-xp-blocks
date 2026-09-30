@@ -118,10 +118,12 @@ used only by a template have no field to follow (`blocks-images.close`).
 
 Editor-facing texts — the inline `text:` values in the YAML descriptors and the English phrases in
 `i18n/phrases.properties` — are written in British English (colour, centre, stylised), and the two must say the
-same thing. Identifiers keep their existing spelling (`color`, `center`, `color-selector`): code, generated types and
-i18n keys depend on them. The bundles use the standard names, `phrases.properties` (English, the default),
-`phrases_no.properties` (Bokmål) and `phrases_nn.properties` (Nynorsk); do not rename them to sidestep collisions with
-a consuming app's or another library's bundles, since any name is just as exposed.
+same thing. Help texts (`.helpText` keys and `helpText:` in the descriptors) are sentences and end with a full stop, in
+every language; labels, display names and descriptions do not. Identifiers keep their existing spelling (`color`,
+`center`, `color-selector`): code, generated types and i18n keys depend on them. The bundles use the standard names,
+`phrases.properties` (English, the default), `phrases_no.properties` (Bokmål) and `phrases_nn.properties` (Nynorsk);
+do not rename them to sidestep collisions with a consuming app's or another library's bundles, since any name is just
+as exposed.
 
 A template is resolved relative to the file that calls `resolve()`, which is why tsdown must emit every source file as
 its own output file.
