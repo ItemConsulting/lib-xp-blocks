@@ -1,5 +1,11 @@
 # @item-enonic-types/lib-blocks
 
+## 1.0.0-beta.2
+
+### Patch Changes
+
+- 250b589: Improve instructions in phrases for a11y
+
 ## 1.0.0-beta.1
 
 ### Minor Changes
