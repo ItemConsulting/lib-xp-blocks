@@ -6,7 +6,7 @@ export type _BlocksLinkToMore = {
   linkToMoreContentId?: string;
 
   /**
-   * Link text
+   * Bottom link text
    */
   linkToMoreText?: string;
 };

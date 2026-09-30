@@ -24,7 +24,7 @@ form:
       text: "Quoted by"
       i18n: "form-fragments.blocks-quote.attribution"
     helpText:
-      text: "The name, and optionally the role, of the person quoted"
+      text: "The name, and optionally the role, of the person quoted."
       i18n: "form-fragments.blocks-quote.attribution.helpText"
     occurrences:
       min: 0

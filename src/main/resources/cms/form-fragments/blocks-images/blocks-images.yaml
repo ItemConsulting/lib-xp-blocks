@@ -26,10 +26,10 @@ form:
       - type: "TextLine"
         name: "altText"
         label:
-          text: "Description of the image for visually impaired users (alt text)"
+          text: "Description of the image (alt text)"
           i18n: "form-fragments.blocks-images.items.altText"
         helpText:
-          text: "Describe the image in context of the article"
+          text: "Describe the image – in the context of the article – so that users with visual impairments get an experience equivalent to that of sighted users (WCAG 1.1.1)."
           i18n: "form-fragments.blocks-images.items.altText.helpText"
         occurrences:
           min: 1
