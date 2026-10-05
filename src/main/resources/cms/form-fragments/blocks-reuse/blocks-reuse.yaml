@@ -4,7 +4,7 @@ title:
   text: "Reuse"
   i18n: "form-fragments.blocks-reuse.displayName"
 description:
-  text: "Reuse all blocks inside another content"
+  text: "Reuse all blocks inside another content, or show a fragment"
   i18n: "form-fragments.blocks-reuse.description"
 form:
   - type: "ContentSelector"
@@ -12,6 +12,9 @@ form:
     label:
       text: "Include blocks from this content"
       i18n: "form-fragments.blocks-reuse.contentId"
+    helpText:
+      text: "Select a content to include all of its blocks or insert a fragment."
+      i18n: "form-fragments.blocks-reuse.contentId.helpText"
     occurrences:
       min: 1
       max: 1

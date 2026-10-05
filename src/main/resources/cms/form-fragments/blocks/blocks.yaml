@@ -96,7 +96,7 @@ form:
           text: "Reuse"
           i18n: "form-fragments.blocks-reuse.displayName"
         helpText:
-          text: "Reuse all blocks inside another content"
+          text: "Reuse all blocks inside another content, or show a fragment"
           i18n: "form-fragments.blocks-reuse.description"
         items:
           - include: "blocks-reuse"
