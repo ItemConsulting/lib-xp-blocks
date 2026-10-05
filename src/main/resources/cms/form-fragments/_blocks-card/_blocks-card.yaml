@@ -1,3 +1,4 @@
+# yaml-language-server: $schema=https://www.schemastore.org/enonic-xp-form-fragment-8.0.0.json
 kind: "FormFragment"
 title:
   text: "Card"

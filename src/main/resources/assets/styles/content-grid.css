@@ -15,6 +15,7 @@
     var(--content-grid--feature) [feature-end]
     var(--content-grid--full) [full-end];
   row-gap: var(--content-grid--row-gap, var(--ds-size-10));
+  align-content: start;
 
   .content-grid {
     grid-template-columns: subgrid;
