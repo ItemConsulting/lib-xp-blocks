@@ -6,7 +6,21 @@ plugins {
   id "com.github.node-gradle.node" version "7.1.0"
 }
 
+// XP 8 requires Java 25 (core-api declares osgi.ee=JavaSE;version=25), so pin the toolchain used to compile.
+java {
+  toolchain {
+    languageVersion = JavaLanguageVersion.of(25)
+  }
+}
+
 dependencies {
+  // ─────────────────────────────────────────────────────────────────────────
+  // XP APIs the Java sources compile against. Provided by the XP runtime, so they must not be bundled into the app.
+  // ─────────────────────────────────────────────────────────────────────────
+  // portal-api brings web-api and script-api along transitively.
+  compileOnly xplibs.api.core
+  compileOnly xplibs.api.portal
+
   // ─────────────────────────────────────────────────────────────────────────
   // Libraries the blocks call at runtime (versions in gradle/libs.versions.toml). They are published as runtime
   // dependencies of the jar, and a consumer's `include` is transitive, so consuming apps get them without listing them.

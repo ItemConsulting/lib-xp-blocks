@@ -10,7 +10,7 @@ images, map, quote, text, etc. — that consuming XP apps include in their forms
 
 It is dual-published:
 - **Maven JAR** (`repo.itemtest.no`) — the runtime artifact: compiled server JS, YAML descriptors, FreeMarker
-  templates, CSS and client scripts. Consumers add it via `include "no.item:lib-xp-blocks:<version>"`.
+  templates, CSS, client scripts and the Java script bean. Consumers add it via `include "no.item:lib-xp-blocks:<version>"`.
 - **npm package** (`@item-enonic-types/lib-blocks`) — **types only** (`.d.ts`, including the types generated from the
   descriptors) plus CSS, so consumers get type-safe imports of the block functions the JAR provides at runtime.
 
@@ -35,6 +35,8 @@ Key wiring in `build.gradle`:
   jar.
 - The runtime libraries (`implementation` in `build.gradle`) are published as runtime dependencies in the POM, and a
   consuming app's `include` is transitive, so consumers only declare `include "no.item:lib-xp-blocks:<version>"`.
+- The XP APIs the Java sources use (`xplibs.api.*`) are `compileOnly`: the XP runtime provides them, so they must not
+  end up in a consuming app.
 - `check` depends on `npmCheck` (`npm run check`).
 - `npmBuild` and `npmCheck` depend on `generateTypeScript`, since the TypeScript imports the generated types.
 - `npmBuild` sets `NODE_ENV=development` for `-Penv=dev` (and the legacy `-Pdev`/`-Pdevelopment`), which skips minification.
@@ -107,7 +109,7 @@ Each block lives in `src/main/resources/cms/form-fragments/blocks-<name>/` and i
 
 Form fragments reference each other with `- include: "<name>"`. `blocks/blocks.ts` is the dispatcher that renders a
 list of blocks (consumers can pass extra `processors`). Shared helpers live in `lib/item/blocks/` (`colors`,
-`images`, `links`, `responses`, `utils`, `types`). The admin extension `admin/extensions/color-selector/`
+`fragments`, `images`, `links`, `responses`, `utils`, `types`). The admin extension `admin/extensions/color-selector/`
 backs the color picker (`CustomSelector`) in `_blocks-color`. It implements the `contentstudio.customselector`
 interface, so XP only serves it (through the `admin:extension` universal API) to Content Studio. The i18n keys follow
 `form-fragments.<fragment-name>.<field path>`, where each segment is the name of what it labels: the prefix is the
@@ -127,6 +129,18 @@ as exposed.
 
 A template is resolved relative to the file that calls `resolve()`, which is why tsdown must emit every source file as
 its own output file.
+
+### Fragments in `blocks-reuse`
+
+`blocks-reuse` includes the blocks of the selected content, unless that content is a `portal:fragment`: then the
+fragment itself is rendered, which is how a part gets a place in a list of blocks. XP has no JavaScript API for
+rendering a component, so `lib/item/blocks/fragments.ts` calls the script bean
+`src/main/java/no/item/blocks/FragmentScriptBean.java`. The bean puts a fragment component in a region of the page
+being rendered and has the portal's `PostProcessor` evaluate that region's component instruction, so the fragment
+renders as if an editor had placed it on the page (same `getContent()`, its own `getComponent()`, page contributions
+included). It only uses `portal-api` and `core-api`; do not reach into `portal-impl`. In edit mode the fragment is
+rendered as a preview and stripped of the `data-portal-*` attributes that would make the page editor treat it as a
+component of the page.
 
 ### Generated types (`xp-codegen`)
 

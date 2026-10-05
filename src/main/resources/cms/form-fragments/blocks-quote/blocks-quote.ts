@@ -17,7 +17,7 @@ export function process(block: RawBlocksQuoteAndIntro, { locale }: BlockProcesso
   const model: BlocksQuote & BlocksIntroModel = {
     ...processIntro(block),
     locale,
-    quote: processHtml({ value: block.quote }),
+    quote: processHtml({ value: block.quote ?? "" }),
     attribution: block.attribution,
     image: getImageParamsById({
       key: block.imageId,

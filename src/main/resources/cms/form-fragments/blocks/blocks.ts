@@ -2,6 +2,7 @@ import type { Component, Request, Response } from "@enonic-types/core";
 import { render } from "/lib/freemarker";
 import { type Content, get as getOne } from "/lib/xp/content";
 import { getComponent, getContent } from "/lib/xp/portal";
+import { render as renderFragment } from "../../../lib/item/blocks/fragments";
 import { concat as concatResponse, responseBodyToString } from "../../../lib/item/blocks/responses";
 import type { Optional } from "../../../lib/item/blocks/types";
 import { forceArray } from "../../../lib/item/blocks/utils";
@@ -114,6 +115,12 @@ export function processBlock(selected: string, block: unknown, params: BlockProc
 
 export function processBlocksReuse(block: BlocksReuseRaw, params: BlockProcessorParams): Response {
   const content = block.contentId ? getOne<Content<BlocksRaw>>({ key: block.contentId }) : undefined;
+
+  /* A fragment has no blocks. It is rendered as it is, which lets a part take a place in the list of blocks */
+  if (content?.type === "portal:fragment") {
+    return renderFragment(content._id);
+  }
+
   /* Use language of the imported content to add content with different [lang] in block list */
   const localizedParams: BlockProcessorParams = {
     ...params,
