@@ -3,7 +3,7 @@
   "sideEffects": false,
   "description": "Type definitions and styles for lib-xp-blocks",
   "author": "Tom Arild Jakobsen <tajakobsen@gmail.com>",
-  "version": "1.0.0-beta.2",
+  "version": "1.0.0-beta.3",
   "license": "MIT",
   "files": [
     "dist",

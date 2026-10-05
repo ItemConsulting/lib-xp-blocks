@@ -1,5 +1,11 @@
 # @item-enonic-types/lib-blocks
 
+## 1.0.0-beta.3
+
+### Minor Changes
+
+- 99e0886: Include full HTML from Fragments in reuse-block
+
 ## 1.0.0-beta.2
 
 ### Patch Changes
