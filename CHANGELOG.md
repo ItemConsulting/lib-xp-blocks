@@ -1,5 +1,11 @@
 # @item-enonic-types/lib-blocks
 
+## 1.0.0-beta.4
+
+### Patch Changes
+
+- ae4b054: Update texts for resuse block
+
 ## 1.0.0-beta.3
 
 ### Minor Changes
