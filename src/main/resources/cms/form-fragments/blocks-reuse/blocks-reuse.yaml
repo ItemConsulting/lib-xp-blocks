@@ -10,10 +10,10 @@ form:
   - type: "ContentSelector"
     name: "contentId"
     label:
-      text: "Include blocks from this content"
+      text: "Content to reuse"
       i18n: "form-fragments.blocks-reuse.contentId"
     helpText:
-      text: "Select a content to include all of its blocks or insert a fragment."
+      text: "The visitor sees all the blocks of this content at this place on the page, and later changes to the content show up here too. Select a fragment to show it as it is."
       i18n: "form-fragments.blocks-reuse.contentId.helpText"
     occurrences:
       min: 1

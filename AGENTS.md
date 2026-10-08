@@ -17,6 +17,13 @@ It is dual-published:
 The XP 7 version was published as `no.item:lib-xp-item-blocks` 0.x from the `lib-xp-item-blocks` repository. See
 `README.md` for the consumer-facing install and usage instructions.
 
+## Good practice for form labels in a CMS
+
+1. A label names the field's content as a noun, in sentence case, no trailing punctuation. Checkboxes and toggles are the exception: a short positive verb phrase for what turning it on does.
+2. Help text is one or two full sentences for the editor. It explains the consequence, where the value is shown to the visitor, and what to do when unsure, including the default. It should not restate the label.
+3. Descriptions for content types and parts show up in the picker, so they describe what the thing is, as a noun phrase, not what the code does. Keep it short so it fits in the picker. If the same phrase/label can be used both frontend and backend, that is preferable.
+
+
 ## Build system
 
 Gradle is the primary build tool (`com.enonic.xp.base`, `java-library` and `maven-publish` plugins), with the
